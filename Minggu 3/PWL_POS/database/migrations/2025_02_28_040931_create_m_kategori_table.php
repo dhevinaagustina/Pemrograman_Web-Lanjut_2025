@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('m_kategori', function (Blueprint $table) {
             $table->unsignedBigInteger('kategori_id', 20);
-            $table->String('kategori_kode', 10);
-            $table->String('kategori_nama', 100);
-            $table->timestamp('create_at');
-            $table->timestamp('updated_at');
+            $table->string('kategori_kode', 10);
+            $table->string('kategori_nama', 100);
+            $table->timestamps(); 
         });
     }
 

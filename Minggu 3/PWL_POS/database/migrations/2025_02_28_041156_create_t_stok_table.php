@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->dateTime('stok_tanggal');
             $table->integer('stok_jumlah');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
             // Foreign Key
             $table->foreign('barang_id')->references('barang_id')->on('m_barang');

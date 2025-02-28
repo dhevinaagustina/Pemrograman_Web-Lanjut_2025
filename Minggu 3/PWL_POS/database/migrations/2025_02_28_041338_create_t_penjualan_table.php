@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('pembeli');
             $table->string('penjualan_kode');
             $table->dateTime('penjualan_tanggal');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
             // Foreign Key
             $table->foreign('user_id')->references('user_id')->on('m_user');
