@@ -9,23 +9,19 @@
     <h1>Data User</h1>
     <table border="1">
         <tr>
-            <th>Jumlah Pengguna</th>
-            {{-- <th>ID</th>
-            <tb>Username</tb>
-            <tb>Nama</tb>
-            <tb>ID Level Pengguna</tb> --}}
+            {{-- <th>Jumlah Pengguna</th> --}}
+            <th>ID</th>
+            <th>Username</th>
+            <th>Nama</th>
+            <th>ID Level Pengguna</th>
         </tr>
         {{-- @foreach ($data as $user) --}}
             <tr>
-                <td>{{ $jumlahUser }}</td>
-                {{-- <td>{{ $user->user_id }}</td>
-                <td>{{ $user->username }}</td>
-                <td>{{ $user->nama }}</td>
-                <td>{{ $user->level_id }}</td> --}}
-                {{-- <td>{{ $data->user_id }}</td>
+                {{-- <td>{{ $jumlahUser }}</td> --}}
+                <td>{{ $data->user_id }}</td>
                 <td>{{ $data->username }}</td>
                 <td>{{ $data->nama }}</td>
-                <td>{{ $data->level_id }}</td> --}}
+                <td>{{ $data->level_id }}</td>
             </tr>
         {{-- @endforeach --}}
     </table>
