@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Data User</title>
 </head>
 <body>
     <h1>Data User</h1>
-    <table border="1" cellpadding="2" cellspacing="0">
+    <table border="1">
         <tr>
-            <td>ID</td>
-            <td>Username</td>
-            <td>Nama</td>
-            <td>ID Level Pengguna</td>
+            <th>Jumlah Pengguna</th>
+            {{-- <th>ID</th>
+            <tb>Username</tb>
+            <tb>Nama</tb>
+            <tb>ID Level Pengguna</tb> --}}
         </tr>
-        {{-- @foreach ($data as $d) --}}
-        <tr>
-            <td>{{$data->user_id}}</td>
-            <td>{{$data->username}}</td>
-            <td>{{$data->nama}}</td>
-            <td>{{$data->level_id}}</td>
-        </tr>
+        {{-- @foreach ($data as $user) --}}
+            <tr>
+                <td>{{ $jumlahUser }}</td>
+                {{-- <td>{{ $user->user_id }}</td>
+                <td>{{ $user->username }}</td>
+                <td>{{ $user->nama }}</td>
+                <td>{{ $user->level_id }}</td> --}}
+                {{-- <td>{{ $data->user_id }}</td>
+                <td>{{ $data->username }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->level_id }}</td> --}}
+            </tr>
         {{-- @endforeach --}}
     </table>
 </body>
