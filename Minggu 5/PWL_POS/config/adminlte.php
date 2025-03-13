@@ -301,6 +301,11 @@ return [
     'menu' => [
         // Navbar items:
         [
+            'text' => 'Manage Kategori',
+            'url'  => 'kategori',
+            'icon' => 'fas fa-list',
+        ],
+        [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
@@ -392,6 +397,8 @@ return [
             'icon_color' => 'cyan',
             'url' => '#',
         ],
+
+        
     ],
 
     /*
