@@ -17,6 +17,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/kategori',[KategoriController::class,'index']);
+
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
 Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
