@@ -17,6 +17,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/kategori/create',[KategoriController::class,'create']);
+Route::post('/kategori',[KategoriController::class,'store']);
+
 Route::get('/kategori',[KategoriController::class,'index']);
 
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
