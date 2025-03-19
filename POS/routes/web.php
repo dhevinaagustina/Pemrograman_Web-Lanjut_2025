@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SalesController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +17,43 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Home
-Route::get('/', [HomeController::class, 'index']);
+// POS Implementasi
 
-// Products
-Route::prefix('category')->group(function () {
-    Route::get('/food-beverage', [ProductController::class, 'foodBeverage']);
-    Route::get('/beauty-health', [ProductController::class, 'beautyHealth']);
-    Route::get('/home-care', [ProductController::class, 'homeCare']);
-    Route::get('/baby-kid', [ProductController::class, 'babyKid']);
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/tambah', [UserController::class, 'tambah'])->name('user.tambah');
+Route::post('/user/tambah', [UserController::class, 'tambah_simpan'])->name('user.tambah.simpan');
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('user.ubah');
+Route::post('/user/ubah/{id}', [UserController::class, 'ubah_simpan'])->name('user.ubah.simpan');
+Route::delete('/user/hapus/{id}', [UserController::class, 'hapus'])->name('user.hapus');
+
+
+
+
+
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete'])->name('kategori.delete');
+
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+
+Route::get('/kategori/create',[KategoriController::class,'create']);
+Route::post('/kategori',[KategoriController::class,'store']);
+
+Route::get('/kategori',[KategoriController::class,'index']);
+
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
+
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+
+Route::get('/user/tambah',[UserController::class, 'tambah']);
+Route::post('/user/tambah_simpan',[UserController::class, 'tambah_simpan']);
+
+Route::get('/level', [LevelController::class, 'index']);
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
+
+
+Route::get('/', function () {
+    return view('welcome');
 });
-
-// User Profile
-Route::get('/user/{id}/name/{name}', [UserController::class, 'show']);
-
-// Sales Page
-Route::get('/sales', [SalesController::class, 'index']);
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
