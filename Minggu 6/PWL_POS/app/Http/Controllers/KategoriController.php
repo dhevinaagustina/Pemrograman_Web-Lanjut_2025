@@ -19,7 +19,23 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
+        
+        $validatedData = $request->validate([
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+        
         KategoriModel::create([
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+        
+        $validatedData = $request->validateWithBag('post',[
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+
+        $request->validate([
             'kategori_kode' => $request->kodeKategori,
             'kategori_nama' => $request->namaKategori,
         ]);
@@ -27,25 +43,27 @@ class KategoriController extends Controller
         return redirect('/kategori');
     }
 
-    public function edit($id)
-    {
-        $data = KategoriModel::findOrFail($id); 
-        return view('kategori.edit', ['kategori' => $data]); 
-    }
+    
 
-    public function update(Request $request, $id)
-    {
-        // Update data
-        KategoriModel::where('kategori_id', $id)->update([
-            'kategori_kode' => $request['kodeKategori'],
-            'kategori_nama' => $request['namaKategori']
-        ]);
+    // public function edit($id)
+    // {
+    //     $data = KategoriModel::findOrFail($id); 
+    //     return view('kategori.edit', ['kategori' => $data]); 
+    // }
 
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     // Update data
+    //     KategoriModel::where('kategori_id', $id)->update([
+    //         'kategori_kode' => $request['kodeKategori'],
+    //         'kategori_nama' => $request['namaKategori']
+    //     ]);
 
-    public function delete($id){
-        KategoriModel::where('kategori_id',$id)->delete();
-        return redirect('/kategori');
-    }
+    // }
+
+    // public function delete($id){
+    //     KategoriModel::where('kategori_id',$id)->delete();
+    //     return redirect('/kategori');
+    // }
 
 }
