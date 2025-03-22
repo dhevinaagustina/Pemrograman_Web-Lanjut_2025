@@ -42,6 +42,18 @@ Route::group(['prefix' => 'level'], function () {
     Route::delete('/{id}', [LevelController::class, 'destroy'])->name('level.destroy'); // Hapus level
 });
 
+Route::group(['prefix' => 'kategori'], function () {
+    Route::get('/', [KategoriController::class, 'index'])->name('kategori.index'); // Menampilkan daftar kategori
+    Route::post('/list', [KategoriController::class, 'getKategori'])->name('kategori.list'); // Data JSON untuk DataTables
+    Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create'); // Form tambah kategori
+    Route::post('/', [KategoriController::class, 'store'])->name('kategori.store'); // Simpan kategori baru
+    Route::get('/{id}', [KategoriController::class, 'show'])->name('kategori.show'); // Detail kategori
+    Route::get('/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit'); // Form edit kategori
+    Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update'); // Simpan perubahan kategori
+    Route::delete('/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy'); // Hapus kategori
+});
+
+
 
 
 // Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
