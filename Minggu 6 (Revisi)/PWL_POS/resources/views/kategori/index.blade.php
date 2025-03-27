@@ -17,6 +17,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
@@ -45,23 +46,20 @@
                 </thead>
             </table>
         </div>
-         <!-- Modal -->
-         <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" 
-         data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true">
-     </div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        </div>
     @endsection
-
-    @push('css') 
-    <!-- Bisa ditambahkan CSS jika diperlukan -->
-    @endpush
 
     @push('js')
     <script>
-         function modalAction(url = ''){
-            $('#myModal').load(url,function(){
+        function modalAction(url = '') {
+            $('#myModal').html(''); // Hapus isi modal sebelum load ulang
+            $('#myModal').load(url, function() {
                 $('#myModal').modal('show');
             });
         }
+
         $(document).ready(function() {
             var dataKategori = $('#table_kategori').DataTable({
                 processing: true,
@@ -81,7 +79,8 @@
                     { data: "aksi", className: "text-center", orderable: false, searchable: false }
                 ]
             });
-            $('#kategori_id').on('change', function(){
+
+            $('#kategori_id').on('change', function() {
                 dataKategori.ajax.reload();
             });
         });
