@@ -27,6 +27,10 @@ Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'store_user'])->name('store_user');
+
+
 Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
 
 
