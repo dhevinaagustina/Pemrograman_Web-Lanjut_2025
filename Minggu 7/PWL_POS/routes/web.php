@@ -28,33 +28,11 @@ Route::post('login', [AuthController::class, 'postLogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
-    Route::get('/', [WelcomeController::class, 'index']);
-
-    // route Level
-    
-    // artinya semua route di dalam group ini harus punya role ADM (Administrator) dan MNG (Manager)
-    Route::middleware(['authorize:ADM,MNG'])->group(function () {
-
-        Route::get('/barang', [BarangController::class, 'index']);
-        Route::post('/barang/list', [BarangController::class, 'list']);
-        Route::get('/barang/create_ajax', [BarangController::class, 'create_ajax']); // ajax form create
-        Route::post('/barang_ajax', [BarangController::class, 'store_ajax']); // ajax store
-        Route::get('/barang/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); // ajax form edit
-        Route::put('/barang/{id}/update_ajax', [BarangController::class, 'update_ajax']); // ajax update
-        Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // ajax form confirm
-        Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // ajax delete
-
-    });
-
-
-});
-    
-
 
 
 Route::get('/', [WelcomeController::class,'index']);
 
-Route::middleware(['authorize:ADM,MNG'])->prefix('user')->group(function (){
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
     Route::get('/', [UserController::class, 'index']); // menampilkan halaman awal user
     Route::post('/list', [UserController::class, 'list']); // menampilkan data user dalam bentuk json untuk datatables
     Route::get('/create', [UserController::class, 'create']); // menampilkan halaman form tambah user
@@ -71,7 +49,7 @@ Route::middleware(['authorize:ADM,MNG'])->prefix('user')->group(function (){
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
 });
 
-Route::middleware(['authorize:ADM,MNG'])->prefix('level')->group(function () {
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function () {
     Route::get('/', [LevelController::class, 'index'])->name('level.index'); // Menampilkan daftar level
     Route::post('/list', [LevelController::class, 'getLevels'])->name('level.list'); // DataTables JSON
     Route::get('/create', [LevelController::class, 'create'])->name('level.create'); // Form tambah
@@ -88,7 +66,7 @@ Route::middleware(['authorize:ADM,MNG'])->prefix('level')->group(function () {
     Route::delete('/{id}', [LevelController::class, 'destroy'])->name('level.destroy'); // Hapus level
 });
 
-Route::middleware(['authorize:ADM,MNG'])->prefix('kategori')->group(function () {
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function () {
     Route::get('/', [KategoriController::class, 'index'])->name('kategori.index'); // Menampilkan daftar kategori
     Route::post('/list', [KategoriController::class, 'getKategori'])->name('kategori.list'); // Data JSON untuk DataTables
     Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create'); // Form tambah kategori
@@ -106,7 +84,7 @@ Route::middleware(['authorize:ADM,MNG'])->prefix('kategori')->group(function () 
 
 });
 
-Route::middleware(['authorize:ADM,MNG'])->prefix('supplier')->group(function () {
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('supplier')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index'); // Menampilkan daftar supplier
     Route::post('/list', [SupplierController::class, 'getSuppliers'])->name('supplier.list'); // Data JSON untuk DataTables
     Route::get('/create', [SupplierController::class, 'create'])->name('supplier.create'); // Form tambah supplier
@@ -124,7 +102,7 @@ Route::middleware(['authorize:ADM,MNG'])->prefix('supplier')->group(function () 
 });
 
 
-Route::middleware(['authorize:ADM,MNG'])->prefix('barang')->group(function () {
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function () {
     Route::get('/', [BarangController::class, 'index'])->name('barang.index');
     Route::post('/list', [BarangController::class, 'getBarang'])->name('barang.list');
     Route::get('/create', [BarangController::class, 'create'])->name('barang.create');
@@ -141,24 +119,5 @@ Route::middleware(['authorize:ADM,MNG'])->prefix('barang')->group(function () {
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
 });
 
-
-
-
-
-// Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
-
-// Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-
-// Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
-
-// Route::get('/user/tambah',[UserController::class, 'tambah']);
-// Route::post('/user/tambah_simpan',[UserController::class, 'tambah_simpan']);
-
-// Route::get('/level', [LevelController::class, 'index']);
-// Route::get('/kategori', [KategoriController::class, 'index']);
-// Route::get('/user', [UserController::class, 'index']);
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+});
+    
