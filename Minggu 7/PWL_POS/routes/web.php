@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,23 @@ use App\Http\Controllers\SupplierController;
 |
 */
 
-// Jobsheet 5
+// Jobsheet 7
+Route::pattern('id', '[0-9]+'); //artinya ketika parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postLogin']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function() { //artinya semua route di dalam group ini harus login dulu
+
+    
+
+});
+    
+
+
+
+// Jobsheet 6
 Route::get('/', [WelcomeController::class,'index']);
 
 Route::group(['prefix' => 'user'], function () {

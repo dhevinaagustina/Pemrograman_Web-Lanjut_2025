@@ -66,6 +66,15 @@ placeholder="Search" aria-label="Search">
                     <p>Transaksi Penjualan</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <form id="logout-form-sidebar" action="{{ url('logout') }}" method="GET">
+                    @csrf
+                    <button type="submit" class="nav-link btn btn-danger text-left w-100">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </form>
+            </li>
+            
         </ul>
     </nav>
 </div>
