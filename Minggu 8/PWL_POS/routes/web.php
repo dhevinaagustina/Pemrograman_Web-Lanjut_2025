@@ -8,6 +8,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,16 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
 
 
 Route::get('/', [WelcomeController::class,'index']);
+Route::get('/', function () {
+    return view('dashboard'); // atau view lain yang kamu gunakan
+})->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+});
+
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
     Route::get('/', [UserController::class, 'index']); // menampilkan halaman awal user
@@ -55,6 +66,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
     Route::post('/import_ajax', [UserController::class, 'import_ajax']);
     Route::get('/export_excel', [UserController::class, 'export_excel']);
     Route::get('/export_pdf', [UserController::class, 'export_pdf']);
+    
 });
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function () {

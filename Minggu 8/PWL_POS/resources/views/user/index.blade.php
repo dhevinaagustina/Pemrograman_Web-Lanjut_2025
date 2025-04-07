@@ -4,6 +4,11 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Pengguna</h3>
+        <div class="text-right mb-3">
+            <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-user"></i> Profil Saya
+            </a>
+        </div>        
         <div class="card-tools">
             <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import User</button>
             <a href="{{ url('/user/export_excel') }}" class="btn btn-primary"><i class="fa fa-file- excel"></i> Export User</a>
@@ -11,7 +16,7 @@
             <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
         </div>
     </div>
-
+    
     <div class="card-body">
         <!-- Filter -->
         <div id="filter" class="form-horizontal filter-date p-2 border-bottom mb-2">
@@ -23,7 +28,7 @@
                             <select name="filter_level" class="form-control form-control-sm filter_level" id="filter_level">
                                 <option value="">- Semua -</option>
                                 @foreach($level as $l)
-                                    <option value="{{ $l->level_id }}">{{ $l->level_name }}</option>
+                                <option value="{{ $l->level_id }}">{{ $l->level_name }}</option>
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Level Pengguna</small>
@@ -32,9 +37,9 @@
                 </div>
             </div>
         </div>
-
+        
         @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
         @if(session('error'))
