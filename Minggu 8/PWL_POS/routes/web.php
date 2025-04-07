@@ -72,6 +72,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function ()
     Route::delete('/{id}', [LevelController::class, 'destroy'])->name('level.destroy'); // Hapus level
     Route::get('/import', [LevelController::class, 'import']);
     Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
+    Route::get('/export_excel', [LevelController::class, 'export_excel']);
 });
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function () {
