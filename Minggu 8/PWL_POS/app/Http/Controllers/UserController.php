@@ -365,4 +365,60 @@ class UserController extends Controller
     return redirect('/');
 }
 
+public function export_excel()
+{
+    // Ambil data user beserta level-nya
+    $users = UserModel::select('username', 'nama', 'level_id')
+        ->with('level') // pastikan relasi 'level' sudah didefinisikan di model
+        ->orderBy('username')
+        ->get();
+
+    // Load library PhpSpreadsheet
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Header kolom
+    $sheet->setCellValue('A1', 'No');
+    $sheet->setCellValue('B1', 'Username');
+    $sheet->setCellValue('C1', 'Nama Pengguna');
+    $sheet->setCellValue('D1', 'Level');
+
+    $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+
+    // Isi data
+    $no = 1;
+    $baris = 2;
+    foreach ($users as $user) {
+        $sheet->setCellValue('A' . $baris, $no);
+        $sheet->setCellValue('B' . $baris, $user->username);
+        $sheet->setCellValue('C' . $baris, $user->nama);
+        $sheet->setCellValue('D' . $baris, $user->level ? $user->level->level_name : '-');
+        $baris++;
+        $no++;
+    }
+
+    // Auto-size kolom
+    foreach (range('A', 'D') as $columnID) {
+        $sheet->getColumnDimension($columnID)->setAutoSize(true);
+    }
+
+    $sheet->setTitle('Data User');
+
+    $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $filename = 'Data User ' . date('Y-m-d H-i-s') . '.xlsx';
+
+    // Header response untuk download
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    header('Cache-Control: max-age=0');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+    header('Cache-Control: cache, must-revalidate');
+    header('Pragma: public');
+
+    $writer->save('php://output');
+    exit();
+}
+
+
 }
