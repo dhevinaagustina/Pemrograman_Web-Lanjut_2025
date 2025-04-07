@@ -120,7 +120,8 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function (
     Route::get('/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('/{id}', [BarangController::class, 'update'])->name('barang.update');
     Route::delete('/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
-    Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
+    Route::get('/import', [BarangController::class, 'import']);
+    Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
 });
 
 });
