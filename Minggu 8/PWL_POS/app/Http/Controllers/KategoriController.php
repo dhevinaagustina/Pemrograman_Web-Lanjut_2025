@@ -7,6 +7,7 @@ use App\Models\KategoriModel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KategoriController extends Controller
 {
@@ -274,5 +275,19 @@ class KategoriController extends Controller
         $writer->save('php://output');
         exit();
     }
+
+    public function export_pdf()
+    {
+        ini_set('max_execution_time', 300); // jaga-jaga kalau datanya banyak
+
+        $kategori = KategoriModel::orderBy('kategori_kode')->get();
+
+        $pdf = Pdf::loadView('kategori.export_pdf', ['kategori' => $kategori]);
+        $pdf->setPaper('a4', 'portrait');
+        $pdf->setOption(['isRemoteEnabled' => true]);
+
+        return $pdf->stream('Data Kategori ' . date('Y-m-d H:i:s') . '.pdf');
+    }
+
 
 }
