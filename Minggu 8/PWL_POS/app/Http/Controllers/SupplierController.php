@@ -267,62 +267,117 @@ class SupplierController extends Controller
     return view('supplier.import');
 }
 
-public function import_ajax(Request $request)
-{
-    if ($request->ajax() || $request->wantsJson()) {
-        $rules = [
-            'file_supplier' => ['required', 'mimes:xlsx', 'max:1024']
-        ];
+    public function import_ajax(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'file_supplier' => ['required', 'mimes:xlsx', 'max:1024']
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validasi Gagal',
-                'msgField' => $validator->errors()
-            ]);
-        }
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
 
-        $file = $request->file('file_supplier');
+            $file = $request->file('file_supplier');
 
-        $reader = IOFactory::createReader('Xlsx');
-        $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($file->getRealPath());
-        $sheet = $spreadsheet->getActiveSheet();
+            $reader = IOFactory::createReader('Xlsx');
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($file->getRealPath());
+            $sheet = $spreadsheet->getActiveSheet();
 
-        $data = $sheet->toArray(null, false, true, true);
+            $data = $sheet->toArray(null, false, true, true);
 
-        $insert = [];
-        if (count($data) > 1) {
-            foreach ($data as $baris => $value) {
-                if ($baris > 1) {
-                    $insert[] = [
-                        'supplier_nama' => $value['A'],
-                        'supplier_alamat' => $value['B'],
-                        'supplier_telepon' => $value['C'],
-                        'created_at' => now(),
-                    ];
+            $insert = [];
+            if (count($data) > 1) {
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) {
+                        $insert[] = [
+                            'supplier_nama' => $value['A'],
+                            'supplier_alamat' => $value['B'],
+                            'supplier_telepon' => $value['C'],
+                            'created_at' => now(),
+                        ];
+                    }
                 }
-            }
 
-            if (count($insert) > 0) {
-                SupplierModel::insertOrIgnore($insert);
-            }
+                if (count($insert) > 0) {
+                    SupplierModel::insertOrIgnore($insert);
+                }
 
-            return response()->json([
-                'status' => true,
-                'message' => 'Data supplier berhasil diimport'
-            ]);
-        } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'Tidak ada data yang diimport'
-            ]);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data supplier berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
+                ]);
+            }
         }
+
+        return redirect('/');
     }
 
-    return redirect('/');
-}
+    public function export_excel()
+    {
+        // Ambil data supplier
+        $supplier = SupplierModel::select('supplier_nama', 'supplier_telepon', 'supplier_alamat')
+            ->orderBy('supplier_nama')
+            ->get();
+
+        // Load PhpSpreadsheet
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Header kolom
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama Supplier');
+        $sheet->setCellValue('C1', 'Telepon');
+        $sheet->setCellValue('D1', 'Alamat');
+
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+
+        // Isi data
+        $no = 1;
+        $baris = 2;
+        foreach ($supplier as $s) {
+            $sheet->setCellValue('A' . $baris, $no);
+            $sheet->setCellValue('B' . $baris, $s->supplier_nama);
+            $sheet->setCellValue('C' . $baris, $s->supplier_telepon);
+            $sheet->setCellValue('D' . $baris, $s->supplier_alamat);
+            $baris++;
+            $no++;
+        }
+
+        // Auto-size kolom
+        foreach (range('A', 'D') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        $sheet->setTitle('Data Supplier');
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Supplier ' . date('Y-m-d H-i-s') . '.xlsx';
+
+        // Header response
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+
+        $writer->save('php://output');
+        exit();
+    }
+
 
     
 }

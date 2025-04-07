@@ -115,6 +115,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('supplier')->group(function
     Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax'])->name('supplier.delete_ajax'); // Hapus supplier (AJAX)
     Route::get('/import', [SupplierController::class, 'import']);
     Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
+    Route::get('/export_excel', [SupplierController::class, 'export_excel']);
 });
 
 
