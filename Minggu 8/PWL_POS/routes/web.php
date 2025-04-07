@@ -68,6 +68,8 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function ()
     Route::get('/{id}/edit', [LevelController::class, 'edit'])->name('level.edit'); // Form edit
     Route::put('/{id}', [LevelController::class, 'update'])->name('level.update'); // Simpan perubahan
     Route::delete('/{id}', [LevelController::class, 'destroy'])->name('level.destroy'); // Hapus level
+    Route::get('/import', [LevelController::class, 'import']);
+    Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
 });
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function () {
