@@ -91,6 +91,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function
     Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax'); // Hapus kategori (AJAX)
     Route::get('/import', [KategoriController::class, 'import']);
     Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
+    Route::get('/export_excel', [KategoriController::class, 'export_excel']);
 
 
 });
