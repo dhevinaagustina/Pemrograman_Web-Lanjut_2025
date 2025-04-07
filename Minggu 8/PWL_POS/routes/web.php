@@ -110,6 +110,8 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('supplier')->group(function
     Route::put('/{id}', [SupplierController::class, 'update'])->name('supplier.update'); // Simpan perubahan supplier
     Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy'); // Hapus supplier
     Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax'])->name('supplier.delete_ajax'); // Hapus supplier (AJAX)
+    Route::get('/import', [SupplierController::class, 'import']);
+    Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
 });
 
 
