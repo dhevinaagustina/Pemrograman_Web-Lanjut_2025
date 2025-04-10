@@ -1,32 +1,75 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
 @section('content')
-<div class="container">
-    <h2>Tambah User</h2>
-    <form action="{{ route('user.tambah.simpan') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" required>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools"></div>
         </div>
-        <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" required>
+        <div class="card-body">
+            <form method="POST" action="{{ url('user') }}" class="form-horizontal">
+                @csrf
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Level</label>
+                    <div class="col-11">
+                        <select class="form-control" id="level_id" name="level_id" required>
+                            <option value="">- Pilih Level -</option>
+                            @foreach($level as $item)
+                                <option value="{{ $item->level_id }}">{{ $item->level_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('level_id')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Username</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}" required>
+                        @error('username')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Nama</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
+                        @error('nama')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Password</label>
+                    <div class="col-11">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        @error('password')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"></label>
+                    <div class="col-11">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('user') }}">Kembali</a>
+                    </div>
+                </div>
+
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="level_id" class="form-label">Level</label>
-            <select name="level_id" class="form-control" required>
-                @foreach ($levels as $level)
-                    <option value="{{ $level->level_id }}">{{ $level->level_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('user.index') }}" class="btn btn-secondary">Kembali</a>
-    </form>
-</div>
+    </div>
 @endsection
+
+@push('css')
+@endpush
+
+@push('js')
+@endpush
