@@ -56,6 +56,10 @@
                         </div>
                     </div>
                 </form>
+                <!-- Tambahan link ke halaman registrasi -->
+                <div class="text-center mt-3">
+                    <p>Belum punya akun? <a href="{{ url('register') }}" class="text-primary" style="text-decoration: underline;">Daftar di sini</a></p>
+                </div>
             </div>
         </div>
     </div>

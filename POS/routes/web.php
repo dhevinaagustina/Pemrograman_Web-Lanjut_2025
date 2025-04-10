@@ -21,7 +21,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Jobsheet 7
+
 Route::pattern('id', '[0-9]+'); //artinya ketika parameter {id}, maka harus berupa angka
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
