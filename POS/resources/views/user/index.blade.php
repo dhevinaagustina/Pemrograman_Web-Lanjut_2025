@@ -3,12 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Daftar Pengguna</h3>
-        <div class="text-right mb-3">
-            <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary btn-sm">
-                <i class="fas fa-user"></i> Profil Saya
-            </a>
-        </div>        
+        <h3 class="card-title">Daftar Pengguna</h3>        
         <div class="card-tools">
             <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import User</button>
             <a href="{{ url('/user/export_excel') }}" class="btn btn-primary"><i class="fa fa-file- excel"></i> Export User</a>
