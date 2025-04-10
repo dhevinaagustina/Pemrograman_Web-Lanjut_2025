@@ -36,10 +36,10 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
 
 
 Route::get('/', [WelcomeController::class,'index']);
-Route::get('/', function () {
+
+Route::get('/dashboard', function () {
     return view('dashboard'); // atau view lain yang kamu gunakan
 })->name('dashboard');
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
