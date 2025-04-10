@@ -4,12 +4,21 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Supplier</h3>
-        <div class="card-tools">
-            <button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-info">Import Supplier</button>
-            <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary"><i class="fa fa-file- excel"></i> Export Supplier</a>
-            <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file- pdf"></i> Export Supplier</a>
-            <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-success">Tambah Supplier (Ajax)</button>
+        <div class="card-tools d-flex flex-wrap gap-2">
+            <button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-info">
+                <i class="fas fa-file-import mr-1"></i> Import Supplier
+            </button>
+            <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary">
+                <i class="fas fa-file-excel mr-1"></i> Export Excel
+            </a>
+            <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-danger">
+                <i class="fas fa-file-pdf mr-1"></i> Export PDF
+            </a>
+            <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-success">
+                <i class="fas fa-plus-square mr-1"></i> Tambah Supplier (Ajax)
+            </button>
         </div>
+        
     </div>
 
     <div class="card-body">

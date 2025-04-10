@@ -4,12 +4,21 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Pengguna</h3>        
-        <div class="card-tools">
-            <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import User</button>
-            <a href="{{ url('/user/export_excel') }}" class="btn btn-primary"><i class="fa fa-file- excel"></i> Export User</a>
-            <a href="{{ url('/user/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file- pdf"></i> Export User</a>
-            <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+        <div class="card-tools d-flex flex-wrap gap-2">
+            <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">
+                <i class="fas fa-file-import mr-1"></i> Import User
+            </button>
+            <a href="{{ url('/user/export_excel') }}" class="btn btn-primary">
+                <i class="fas fa-file-excel mr-1"></i> Export Excel
+            </a>
+            <a href="{{ url('/user/export_pdf') }}" class="btn btn-danger">
+                <i class="fas fa-file-pdf mr-1"></i> Export PDF
+            </a>
+            <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">
+                <i class="fas fa-user-plus mr-1"></i> Tambah User (Ajax)
+            </button>
         </div>
+        
     </div>
     
     <div class="card-body">

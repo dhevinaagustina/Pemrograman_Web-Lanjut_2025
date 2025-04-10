@@ -4,12 +4,21 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Kategori</h3>
-        <div class="card-tools">
-            <button onclick="modalAction('{{ url('/kategori/import') }}')" class="btn btn-info">Import Kategori</button>
-            <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary"><i class="fa fa-file- excel"></i> Export Kategori</a>
-            <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file- pdf"></i> Export Kategori</a>
-            <button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+        <div class="card-tools d-flex flex-wrap gap-2">
+            <button onclick="modalAction('{{ url('/kategori/import') }}')" class="btn btn-info">
+                <i class="fas fa-file-import mr-1"></i> Import Kategori
+            </button>
+            <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary">
+                <i class="fas fa-file-excel mr-1"></i> Export Excel
+            </a>
+            <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-danger">
+                <i class="fas fa-file-pdf mr-1"></i> Export PDF
+            </a>
+            <button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-success">
+                <i class="fas fa-plus-square mr-1"></i> Tambah Kategori (Ajax)
+            </button>
         </div>
+        
     </div>
 
     <div class="card-body">
