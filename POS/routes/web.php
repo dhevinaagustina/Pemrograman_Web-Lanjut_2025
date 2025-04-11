@@ -10,6 +10,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,6 +182,12 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () 
     Route::post('/import_ajax', [StokController::class, 'import_ajax']);
     Route::get('/export_excel', [StokController::class, 'export_excel']);
     Route::get('/export_pdf', [StokController::class, 'export_pdf']);
+});
+
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('transaksi')->group(function () {
+    Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::post('/list', [TransaksiController::class, 'getTransaksi'])->name('transaksi.list');
+    Route::get('/{id}/show_ajax', [TransaksiController::class, 'show_ajax']);
 });
 
 });
