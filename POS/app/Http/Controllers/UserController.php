@@ -123,6 +123,24 @@ class UserController extends Controller
         return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
+    public function show_ajax($id)
+    {
+        $user = UserModel::with('level')->find($id);
+    
+        $page = (object)[
+            'title' => 'Detail User'
+        ];
+    
+        $breadcrumb = (object)[
+            'title' => 'User',
+            'list' => ['User', 'Detail']
+        ];
+    
+        $activeMenu = 'user'; // <--- Tambahkan ini sesuai menu yang aktif di sidebar
+    
+        return view('user.show_ajax', compact('user', 'page', 'breadcrumb', 'activeMenu'));
+    }
+
     // Menampilkan halaman form edit user
     public function edit(string $id)
     {

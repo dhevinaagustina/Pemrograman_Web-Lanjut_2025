@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SupplierModel extends Model
 {
     use HasFactory;
-    protected $table = 'm_supplier'; // Sesuaikan dengan nama tabel di database
-    protected $primaryKey = 'supplier_id'; // Sesuaikan dengan primary key tabel
+
+    protected $table = 'm_supplier'; // Nama tabel
+    protected $primaryKey = 'supplier_id'; // Primary key tabel
+    public $timestamps = true; // Atur sesuai dengan tabel kamu (true jika ada created_at & updated_at)
 
     protected $fillable = [
         'supplier_kode',
@@ -17,4 +19,10 @@ class SupplierModel extends Model
         'supplier_alamat',
         'supplier_telepon',
     ];
+
+    // Relasi ke tabel stok
+    public function stok()
+    {
+        return $this->hasMany(StokModel::class, 'supplier_id', 'supplier_id');
+    }
 }

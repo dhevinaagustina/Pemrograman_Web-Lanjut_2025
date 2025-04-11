@@ -163,6 +163,25 @@ class SupplierController extends Controller
         return view('supplier.show', compact('breadcrumb', 'page', 'supplier', 'activeMenu'));
     }
 
+    public function show_ajax($id)
+{
+    $supplier = SupplierModel::find($id);
+
+    $page = (object)[
+        'title' => 'Detail Supplier'
+    ];
+
+    $breadcrumb = (object)[
+        'title' => 'Supplier',
+        'list' => ['Supplier', 'Detail']
+    ];
+
+    $activeMenu = 'supplier'; // Sesuaikan dengan menu yang aktif
+
+    return view('supplier.show_ajax', compact('supplier', 'page', 'breadcrumb', 'activeMenu'));
+}
+
+
     public function create_ajax()
     {
         return view('supplier.create_ajax');

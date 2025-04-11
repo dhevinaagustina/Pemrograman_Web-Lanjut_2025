@@ -47,6 +47,25 @@ class KategoriController extends Controller
         }
     }
 
+    public function show_ajax($id)
+{
+    $kategori = KategoriModel::find($id);
+
+    $page = (object)[
+        'title' => 'Detail Kategori'
+    ];
+
+    $breadcrumb = (object)[
+        'title' => 'Kategori',
+        'list' => ['Kategori', 'Detail']
+    ];
+
+    $activeMenu = 'kategori';
+
+    return view('kategori.show_ajax', compact('kategori', 'page', 'breadcrumb', 'activeMenu'));
+}
+
+
     public function create_ajax()
     {
         return view('kategori.create_ajax');

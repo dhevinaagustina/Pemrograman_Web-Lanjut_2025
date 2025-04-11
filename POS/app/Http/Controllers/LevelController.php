@@ -155,6 +155,25 @@ class LevelController extends Controller
     return view('level.show', compact('breadcrumb', 'page', 'level', 'activeMenu'));
     }
 
+    public function show_ajax($id)
+{
+    $level = LevelModel::find($id);
+
+    $page = (object)[
+        'title' => 'Detail Level'
+    ];
+
+    $breadcrumb = (object)[
+        'title' => 'Level',
+        'list' => ['Level', 'Detail']
+    ];
+
+    $activeMenu = 'level'; // Sesuaikan dengan menu yang aktif di sidebar
+
+    return view('level.show_ajax', compact('level', 'page', 'breadcrumb', 'activeMenu'));
+}
+
+
     public function create_ajax()
     {
         return view('level.create_ajax'); // Menampilkan view untuk form tambah level via AJAX

@@ -55,6 +55,25 @@ class BarangController extends Controller
             ->rawColumns(['aksi']) // ada teks html
             ->make(true);
     }
+    
+    public function show_ajax($id)
+{
+    $barang = BarangModel::with('kategori')->find($id);
+
+    $page = (object)[
+        'title' => 'Detail Barang'
+    ];
+
+    $breadcrumb = (object)[
+        'title' => 'Barang',
+        'list' => ['Barang', 'Detail']
+    ];
+
+    $activeMenu = 'barang';
+
+    return view('barang.show_ajax', compact('barang', 'page', 'breadcrumb', 'activeMenu'));
+}
+
 
     public function create_ajax()
     {

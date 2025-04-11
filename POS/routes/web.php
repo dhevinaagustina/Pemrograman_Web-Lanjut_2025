@@ -9,6 +9,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
     Route::get('/create_ajax', [UserController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
     Route::post('/ajax', [UserController::class, 'store_ajax']);      // Menyimpan data user baru Ajax
     Route::get('/{id}', [UserController::class, 'show']); // menampilkan detail user
+    Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
     Route::get('/{id}/edit', [UserController::class, 'edit']); // menampilkan halaman form edit user
     Route::put('/{id}', [UserController::class, 'update']); // menyimpan perubahan data user
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // Menampilkan halaman form edit user Ajax
@@ -77,6 +79,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function ()
     Route::get('/create_ajax', [LevelController::class, 'create_ajax']); // Menampilkan halaman form tambah level Ajax
     Route::post('/ajax', [LevelController::class, 'store_ajax']); // Menyimpan data level baru Ajax
     Route::get('/{id}', [LevelController::class, 'show'])->name('level.show'); // Menampilkan detail level
+    Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
     Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax'])->name('level.edit_ajax'); // Form edit (AJAX)
     Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax'])->name('level.update_ajax'); // Simpan perubahan (AJAX)
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax'])->name('level.confirm_ajax'); 
@@ -98,6 +101,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function
     Route::get('/create_ajax', [KategoriController::class, 'create_ajax'])->name('kategori.create_ajax');// Form tambah kategori (AJAX)
     Route::post('/ajax', [KategoriController::class, 'store_ajax'])->name('kategori.store_ajax'); // Simpan kategori baru (AJAX)
     Route::get('/{id}', [KategoriController::class, 'show'])->name('kategori.show'); // Detail kategori
+    Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']);
     Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax'])->name('kategori.edit_ajax'); // Form edit kategori (AJAX)
     Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax'])->name('kategori.update_ajax'); // Simpan perubahan kategori (AJAX)
     Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax'])->name('kategori.confirm_ajax'); // Konfirmasi hapus (AJAX)
@@ -120,6 +124,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('supplier')->group(function
     Route::get('/create_ajax', [SupplierController::class, 'create_ajax'])->name('supplier.create_ajax'); // Form tambah supplier (AJAX)
     Route::post('/ajax', [SupplierController::class, 'store_ajax'])->name('supplier.store_ajax'); // Simpan supplier baru (AJAX)
     Route::get('/{id}', [SupplierController::class, 'show'])->name('supplier.show'); // Detail supplier
+    Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
     Route::get('/{id}/edit_ajax', [SupplierController::class, 'edit_ajax'])->name('supplier.edit_ajax'); // Form edit supplier (AJAX)
     Route::put('/{id}/update_ajax', [SupplierController::class, 'update_ajax'])->name('supplier.update_ajax'); // Simpan perubahan supplier (AJAX)
     Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax'])->name('supplier.confirm_ajax'); // Konfirmasi hapus (AJAX)
@@ -143,6 +148,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function (
     Route::get('/create_ajax', [BarangController::class, 'create_ajax']);
     Route::post('/ajax', [BarangController::class, 'store_ajax']);
     Route::get('/{id}', [BarangController::class, 'show'])->name('barang.show');
+    Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
     Route::get('/{id}/edit_ajax', [BarangController::class, 'edit_ajax']);
     Route::put('/{id}/update_ajax', [BarangController::class, 'update_ajax']);
     Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);
@@ -154,6 +160,27 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function (
     Route::get('/export_excel', [BarangController::class, 'export_excel']);
     Route::get('/export_pdf', [BarangController::class, 'export_pdf']);
 
+});
+
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () {
+    Route::get('/', [StokController::class, 'index'])->name('stok.index');
+    Route::post('/list', [StokController::class, 'getStok'])->name('stok.list');
+    Route::get('/create', [StokController::class, 'create'])->name('stok.create');
+    Route::post('/', [StokController::class, 'store'])->name('stok.store');
+    Route::get('/create_ajax', [StokController::class, 'create_ajax']);
+    Route::post('/ajax', [StokController::class, 'store_ajax']);
+    Route::get('/{id}', [StokController::class, 'show'])->name('stok.show');
+    Route::get('/{id}/show_ajax', [StokController::class, 'show_ajax']);
+    Route::get('/{id}/edit_ajax', [StokController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [StokController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [StokController::class, 'confirm_ajax']);
+    Route::get('/{id}/edit', [StokController::class, 'edit'])->name('stok.edit');
+    Route::put('/{id}', [StokController::class, 'update'])->name('stok.update');
+    Route::delete('/{id}', [StokController::class, 'destroy'])->name('stok.destroy');
+    Route::get('/import', [StokController::class, 'import']);
+    Route::post('/import_ajax', [StokController::class, 'import_ajax']);
+    Route::get('/export_excel', [StokController::class, 'export_excel']);
+    Route::get('/export_pdf', [StokController::class, 'export_pdf']);
 });
 
 });
