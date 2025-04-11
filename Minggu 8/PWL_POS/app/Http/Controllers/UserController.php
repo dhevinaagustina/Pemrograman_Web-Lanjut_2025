@@ -308,7 +308,7 @@ class UserController extends Controller
         return view('user.import');
     }
 
-    public function import_ajax(Request $request)
+    public function import_ajax(Request $request)   
 {
     if ($request->ajax() || $request->wantsJson()) {
         $rules = [
@@ -338,8 +338,8 @@ class UserController extends Controller
             foreach ($data as $index => $row) {
                 if ($index > 1) { // Lewati baris header
                     $insert[] = [
-                        'name' => $row['A'],
-                        'email' => $row['B'],
+                        'username' => $row['A'],
+                        'nama' => $row['B'],
                         'password' => Hash::make($row['C']),
                         'level_id' => $row['D'],
                         'created_at' => now(),
