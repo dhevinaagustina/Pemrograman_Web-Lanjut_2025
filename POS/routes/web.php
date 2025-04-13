@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
+Route::middleware(['authorize:ADM'])->prefix('user')->group(function (){
     Route::get('/', [UserController::class, 'index']); // menampilkan halaman awal user
     Route::post('/list', [UserController::class, 'list']); // menampilkan data user dalam bentuk json untuk datatables
     Route::get('/create', [UserController::class, 'create']); // menampilkan halaman form tambah user
@@ -72,7 +72,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){
     
 });
 
-Route::middleware(['authorize:ADM,MNG,STF'])->prefix('level')->group(function () {
+Route::middleware(['authorize:ADM'])->prefix('level')->group(function () {
     Route::get('/', [LevelController::class, 'index'])->name('level.index'); // Menampilkan daftar level
     Route::post('/list', [LevelController::class, 'getLevels'])->name('level.list'); // DataTables JSON
     Route::get('/create', [LevelController::class, 'create'])->name('level.create'); // Form tambah
@@ -117,7 +117,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('kategori')->group(function
 
 });
 
-Route::middleware(['authorize:ADM,MNG,STF'])->prefix('supplier')->group(function () {
+Route::middleware(['authorize:ADM,MNG'])->prefix('supplier')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index'); // Menampilkan daftar supplier
     Route::post('/list', [SupplierController::class, 'getSuppliers'])->name('supplier.list'); // Data JSON untuk DataTables
     Route::get('/create', [SupplierController::class, 'create'])->name('supplier.create'); // Form tambah supplier
@@ -186,7 +186,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () 
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('transaksi')->group(function () {
     Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
-    Route::post('/list', [TransaksiController::class, 'getTransaksi'])->name('transaksi.list');
+    Route::post('/list', [TransaksiController::class, 'getPenjualan'])->name('transaksi.list');
     Route::get('/{id}/show_ajax', [TransaksiController::class, 'show_ajax']);
 });
 
