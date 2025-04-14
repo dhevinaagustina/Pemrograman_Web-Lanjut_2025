@@ -100,3 +100,73 @@
         </ul>
     </nav>
 </div>
+
+<style>
+    /* Untuk semua teks di sidebar */
+    .sidebar, 
+    .nav-sidebar .nav-link, 
+    .nav-sidebar .nav-header,
+    .sidebar .user-panel .info a,
+    .sidebar .form-control-sidebar {
+        color: #ffffff !important; /* Putih terang */
+    }
+
+    /* Ikon sidebar */
+    .nav-icon {
+        color: #ffffff !important;
+    }
+
+    /* Teks menu aktif */
+    .nav-sidebar .nav-link.active {
+        background-color: #0d6efd !important;
+        color: #fff !important;
+        font-weight: bold;
+    }
+
+    /* Text shadow agar teks lebih terbaca di gradasi */
+    .nav-sidebar .nav-link p,
+    .sidebar .user-panel .info a,
+    .nav-sidebar .nav-header {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Header POS SYSTEM */
+    .brand-text {
+        color: #ffffff !important;
+        font-weight: bold;
+    }
+
+    /* Placeholder Search Box */
+    .form-control::placeholder {
+        color: #ccc;
+    }
+/* Tambahkan garis pemisah antar menu */
+.nav-sidebar .nav-item:not(:last-child) .nav-link {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.4rem; /* dikurangi */
+    margin-bottom: 0.4rem;  /* dikurangi */
+}
+
+/* Garis untuk header section */
+.nav-sidebar .nav-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 0.3rem;  /* dikurangi */
+    margin: 1rem 0 0.5rem;   /* dikurangi */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Penyesuaian untuk logout agar tidak ada garis */
+.nav-sidebar .nav-item:last-child {
+    margin-top: 1rem;  /* dikurangi */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 0.6rem; /* dikurangi */
+}
+
+/* Perbaikan spacing untuk item aktif */
+.nav-sidebar .nav-link.active {
+    margin-bottom: 0.4rem; /* dikurangi */
+}
+
+</style>
