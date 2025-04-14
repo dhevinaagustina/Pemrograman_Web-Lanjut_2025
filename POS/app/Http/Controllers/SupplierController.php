@@ -204,6 +204,7 @@ class SupplierController extends Controller
         }
 
         SupplierModel::create([
+            'supplier_kode'     => $request->supplier_kode,
             'supplier_nama' => $request->supplier_nama,
             'supplier_telepon' => $request->supplier_telepon,
             'supplier_alamat' => $request->supplier_alamat,
