@@ -27,6 +27,28 @@ class PenjualanModel extends Model
     // Relasi ke detail transaksi
     public function details()
     {
+        return $this->hasMany(PenjualanDetailModel::class, 'penjualan_id', 'penjualan_id');
+    }
+
+    // PenjualanModel.php
+    public function barang()
+    {
+        return $this->hasManyThrough(
+            BarangModel::class,
+            PenjualanDetailModel::class,
+            'penjualan_id', // Foreign key di PenjualanDetailModel
+            'barang_id',    // Foreign key di BarangModel
+            'penjualan_id', // Local key di PenjualanModel
+            'barang_id'     // Local key di PenjualanDetailModel
+        );
+    }
+
+    // Di dalam PenjualanModel
+    public function stok()
+    {
         return $this->hasMany(PenjualanDetailModel::class, 'penjualan_id');
     }
+
+
+    
 }

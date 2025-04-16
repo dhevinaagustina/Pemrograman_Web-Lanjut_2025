@@ -158,7 +158,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () 
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('transaksi')->group(function () {
     Route::get('/', [TransaksiController::class, 'index']); // Menampilkan halaman awal transaksi
-    Route::post('/list', [TransaksiController::class, 'list']); // Menampilkan data transaksi dalam bentuk JSON untuk DataTables
+    Route::post('/list', [TransaksiController::class, 'getPenjualan'])->name('transaksi.list'); // Menampilkan data transaksi dalam bentuk JSON untuk DataTables
     Route::get('/create_ajax', [TransaksiController::class, 'create_ajax']); // Menampilkan halaman form tambah transaksi (Ajax)
     Route::post('/ajax', [TransaksiController::class, 'store_ajax']); // Menyimpan data transaksi baru (Ajax)
     Route::get('/{id}/show_ajax', [TransaksiController::class, 'show_ajax']); // Menampilkan detail transaksi (Ajax)

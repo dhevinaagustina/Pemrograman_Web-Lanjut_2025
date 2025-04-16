@@ -54,6 +54,9 @@
                     <th>Kode</th>
                     <th>Pembeli</th>
                     <th>Tanggal</th>
+                    <th>Barang Dibeli</th>
+                    <th>Stok Awal</th> <!-- Kolom Baru -->
+                    <th>Stok Setelah Transaksi</th> <!-- Kolom Baru -->
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -94,6 +97,9 @@
                 { data: 'penjualan_kode', name: 'penjualan_kode' },
                 { data: 'pembeli', name: 'pembeli' },
                 { data: 'penjualan_tanggal', name: 'penjualan_tanggal' },
+                { data: 'barang_dibeli', name: 'barang_dibeli' },
+                { data: 'stok_jumlah', name: 'stok_jumlah' }, // Kolom Stok
+                { data: 'stok_setelah', name: 'stok_setelah' }, // Stok Setelah
                 { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
             ]
         });

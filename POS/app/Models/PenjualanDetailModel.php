@@ -30,4 +30,10 @@ class PenjualanDetailModel extends Model
     {
         return $this->belongsTo(BarangModel::class, 'barang_id');
     }
+
+    public function stok()
+    {
+        return $this->hasOne(StokModel::class, 'barang_id', 'barang_id');
+    }
+
 }

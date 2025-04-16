@@ -8,12 +8,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                {{-- Tanggal Transaksi --}}
+                {{-- Kode Transaksi --}}
                 <div class="form-group">
-                    <label>Tanggal Transaksi</label>
-                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
-                    <small id="error-tanggal" class="error-text form-text text-danger"></small>
+                    <label>Kode Transaksi</label>
+                    <input type="text" name="kode" id="kode" class="form-control" required>
+                    <small id="error-kode" class="error-text form-text text-danger"></small>
                 </div>
 
                 {{-- Nama Pelanggan --}}
@@ -23,19 +24,18 @@
                     <small id="error-nama_pelanggan" class="error-text form-text text-danger"></small>
                 </div>
 
-                {{-- Total --}}
+                {{-- Tanggal Transaksi --}}
                 <div class="form-group">
-                    <label>Total</label>
-                    <input type="number" name="total" id="total" class="form-control" required>
-                    <small id="error-total" class="error-text form-text text-danger"></small>
+                    <label>Tanggal Transaksi</label>
+                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                    <small id="error-tanggal" class="error-text form-text text-danger"></small>
                 </div>
+            </div>
 
-                {{-- Keterangan --}}
-                <div class="form-group">
-                    <label>Keterangan</label>
-                    <textarea name="keterangan" id="keterangan" class="form-control" rows="2"></textarea>
-                    <small id="error-keterangan" class="error-text form-text text-danger"></small>
-                </div>
+            <div class="form-group">
+                <label>Total</label>
+                <input type="number" name="total" id="total" class="form-control" required>
+                <small id="error-total" class="error-text form-text text-danger"></small>
             </div>
 
             <div class="modal-footer">
@@ -46,13 +46,15 @@
     </div>
 </form>
 
+
 <script>
     $(document).ready(function () {
         $("#form-tambah").validate({
             rules: {
-                tanggal: {required: true, date: true},
-                nama_pelanggan: {required: true, minlength: 3},
-                total: {required: true, number: true, min: 0},
+                kode: { required: true },
+                nama_pelanggan: { required: true, minlength: 3 },
+                tanggal: { required: true, date: true },
+                total: { required: true, number: true, min: 0 }
             },
             submitHandler: function (form) {
                 $.ajax({
@@ -67,7 +69,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataTransaksi.ajax.reload(); // pastikan ini nama datatable transaksi kamu
+                            dataTransaksi.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function (prefix, val) {
@@ -88,12 +90,14 @@
                 error.addClass('invalid-feedback');
                 element.closest('.form-group').append(error);
             },
-            highlight: function (element, errorClass, validClass) {
+            highlight: function (element) {
                 $(element).addClass('is-invalid');
             },
-            unhighlight: function (element, errorClass, validClass) {
+            unhighlight: function (element) {
                 $(element).removeClass('is-invalid');
             }
         });
     });
 </script>
+
+
