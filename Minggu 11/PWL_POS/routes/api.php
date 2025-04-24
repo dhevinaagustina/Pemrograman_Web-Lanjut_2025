@@ -53,3 +53,13 @@ Route::post('barangs', [BarangController::class, 'store']);
 Route::get('barangs/{barang}', [BarangController::class, 'show']);
 Route::put('barangs/{barang}', [BarangController::class, 'update']);
 Route::delete('barangs/{barang}', [BarangController::class, 'destroy']);
+
+use App\Http\Controllers\Api\TransaksiController;
+
+
+Route::get('transaksis', [TransaksiController::class, 'index']);
+Route::post('transaksis', [TransaksiController::class, 'store']);
+Route::get('transaksis/{transaksi}', [TransaksiController::class, 'show']);
+Route::put('transaksis/{transaksi}', [TransaksiController::class, 'update']);
+Route::delete('transaksis/{transaksi}', [TransaksiController::class, 'destroy']);
+
